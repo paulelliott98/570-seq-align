@@ -3,7 +3,7 @@ Implementation of the *Sequence Alignment* problem using 2 different methods: Dy
 
 # Running the Program
 To run the DP version:
-'python3 basic.py input.txt output.txt'
+`python3 basic.py input.txt output.txt`
 
 To run the Memory-efficient version:
-'python3 efficient.py input.txt output.txt'
+`python3 efficient.py input.txt output.txt`

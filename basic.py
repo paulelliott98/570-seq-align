@@ -65,12 +65,12 @@ def main():
 
     # 2) Run alignment on input data
     a1, a2, score = basic_align(s1, s2)
-    print(a1)
-    print(a2)
-    print(score)
+    print(f"The aligned version of input s1 is: {a1}")
+    print(f"The aligned version of input s2 is: {a2}")
+    print(f"The total minimum alignment cost is: {score}")
 
     # 3) Write to output file
-    write_output_file(output_path)
+    # write_output_file(output_path)
 
 if __name__ == "__main__":
     main()

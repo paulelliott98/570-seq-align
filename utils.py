@@ -2,6 +2,7 @@
 Shared functions and constants used in basic.py and efficient.py
 """
 import sys
+import os
 
 """Alpha and Delta values"""
 ALPHA = { 
@@ -44,5 +45,14 @@ def read_input_file(input_path: str) -> tuple[str, str]:
             line = f.readline().strip()
     return str1, str2
 
-def write_output_file(output_path: str):
-    raise NotImplementedError
+def write_output_file(output_path: str, a1: str, a2: str, score: int, time_ms: float, memory_kb: float):
+    os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+    lines = [
+        f"Aligned version of s1: {a1}",
+        f"Aligned version of s2: {a2}",
+        f"Score: {score}",
+        f"Time(ms): {time_ms}",
+        f"Memory(KB): {memory_kb}",
+    ]
+    with open(output_path, 'w') as f:
+        f.write('\n'.join(lines) + '\n')

@@ -79,11 +79,11 @@ def main():
     print(f"The aligned version of input s1 is: {a1}")
     print(f"The aligned version of input s2 is: {a2}")
     print(f"The total minimum alignment cost is: {score}")
-    print(f"Time (/ms):", (end_time - start_time)*1000)
-    print(f"Memory (/kb):", peak/1024)
+    print(f"Time (ms):", (end_time - start_time)*1000)
+    print(f"Memory (KB):", peak/1024)
 
     # 3) Write to output file
-    # write_output_file(output_path)
+    write_output_file(output_path, a1, a2, score, (end_time - start_time)*1000, peak/1024)
 
 if __name__ == "__main__":
     main()

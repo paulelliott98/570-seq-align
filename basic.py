@@ -1,4 +1,6 @@
 from utils import ALPHA, DELTA, parse_args, read_input_file, write_output_file
+import time
+import tracemalloc
 
 def basic_align(m: str, n: str):
     """Dynamic programming solution (Needleman-Wunsch)"""
@@ -58,6 +60,9 @@ def basic_align(m: str, n: str):
     return s1, s2, opt[M][N]
 
 def main():
+    start_time = time.time() 
+    tracemalloc.start() # time and memory tracker
+
     input_path, output_path = parse_args()
 
     # 1) Read in input data
@@ -65,9 +70,16 @@ def main():
 
     # 2) Run alignment on input data
     a1, a2, score = basic_align(s1, s2)
+
+    (current, peak) = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    end_time = time.time()
+
     print(f"The aligned version of input s1 is: {a1}")
     print(f"The aligned version of input s2 is: {a2}")
     print(f"The total minimum alignment cost is: {score}")
+    print(f"Time (/ms):", (end_time - start_time)*1000)
+    print(f"Memory (/kb):", peak/1024)
 
     # 3) Write to output file
     # write_output_file(output_path)

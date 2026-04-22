@@ -1,5 +1,7 @@
 from utils import ALPHA, DELTA, parse_args, read_input_file, write_output_file
 from basic import basic_align
+import time
+import tracemalloc
 
 def efficient_align(m: str, n: str):
     """Dynamic programming + divide and conquer"""
@@ -8,7 +10,7 @@ def efficient_align(m: str, n: str):
     # Base Case
     # Currently set base case as 100 characters but this can be changed once 
     # we implement the space and time to get the sweet spot
-    if len(m) <= 100 or len(n) <= 100:
+    if len(m) <= 64 or len(n) <= 64:
         s1, s2, score = basic_align(m, n)
         return s1, s2, score
     else:
@@ -59,6 +61,9 @@ def calculate_score(m: str, n: str):
     return prev
 
 def main():
+    start_time = time.time() 
+    tracemalloc.start() # time and memory tracker
+
     input_path, output_path = parse_args()
 
     # 1) Read in input data
@@ -66,9 +71,16 @@ def main():
 
     # 2) Run alignment on input data
     a1, a2, score = efficient_align(s1, s2)
+
+    (current, peak) = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    end_time = time.time()
+
     print(f"The aligned version of input s1 is: {a1}")
     print(f"The aligned version of input s2 is: {a2}")
     print(f"The total minimum alignment cost is: {score}")
+    print(f"Time (/ms):", (end_time - start_time)*1000)
+    print(f"Memory (/kb):", peak/1024)
 
     # 3) Write to output file
     # write_output_file(output_path)
